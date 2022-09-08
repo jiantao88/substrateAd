@@ -1,5 +1,5 @@
-use crate as pallet_template;
-use frame_support::traits::{ConstU16, ConstU64};
+use crate as pallet_poe;
+use frame_support::traits::{ConstU16, ConstU32, ConstU64};
 use frame_system as system;
 use sp_core::H256;
 use sp_runtime::{
@@ -18,7 +18,7 @@ frame_support::construct_runtime!(
 		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
 		System: frame_system::{Pallet, Call, Config, Storage, Event<T>},
-		TemplateModule: pallet_template::{Pallet, Call, Storage, Event<T>},
+		PoeModule: pallet_poe::{Pallet, Call, Storage, Event<T>},
 	}
 );
 
@@ -49,7 +49,8 @@ impl system::Config for Test {
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
 }
 
-impl pallet_template::Config for Test {
+impl pallet_poe::Config for Test {
+	type MaxClaimLength = ConstU32<512>;
 	type Event = Event;
 }
 
